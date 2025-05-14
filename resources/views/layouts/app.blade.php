@@ -13,6 +13,8 @@
 
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
+        <script src="https://cdn.tailwindcss.com"></script>
+        
     </head>
     <body class="font-sans antialiased">
         <div class="min-h-screen bg-gray-100 dark:bg-gray-900">
@@ -29,9 +31,8 @@
 
             <!-- Page Content -->
             <main>
-                 @yield('content')
+                {{ $slot }}
             </main>
         </div>
-        <script src="https://cdn.tailwindcss.com"></script>
     </body>
 </html>

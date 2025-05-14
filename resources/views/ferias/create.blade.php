@@ -1,13 +1,15 @@
-@extends('layouts.app')
+<x-app-layout>
+    <x-slot name="header">
+        <h2 class="font-semibold text-xl text-white leading-tight text-center">
+            {{ __('Crear Nueva Feria') }}
+        </h2>
+    </x-slot>
 
-@section('content')
-    <div class="container">
-        <h1>Crear Nueva Feria</h1>
-        
-        <form action="{{ route('ferias.store') }}" method="POST">
-            @csrf
-
-            <!-- Nombre -->
+    <div class="py-12">
+        <div class="max-w-md mx-auto bg-white shadow-md rounded-lg p-8">
+            <form action="{{ route('ferias.store') }}" method="POST" class="space-y-6">
+                @csrf
+                <!-- Nombre -->
             <div class="mb-4">
                 <label for="nombre" class="block text-sm font-medium text-gray-700">Nombre de la Feria</label>
                 <input type="text" name="nombre" id="nombre" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm" required>
@@ -37,10 +39,13 @@
                 <textarea name="descripcion" id="descripcion" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm"></textarea>
             </div>
 
-            <!-- Botón de Enviar -->
-            <div class="mb-4">
-                <button type="submit" class="bg-blue-500 text-white py-2 px-4 rounded-md">Crear Feria</button>
-            </div>
-        </form>
+                <div>
+                    <button type="submit"
+                        class="w-full inline-flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                        {{ __('Crear Feria') }}
+                    </button>
+                </div>
+            </form>
+        </div>
     </div>
-@endsection
+</x-app-layout>
