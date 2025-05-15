@@ -18,6 +18,10 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
     Route::resource('ferias', FeriaController::class);
+    Route::post('/ferias/{feria}/register', [FeriaController::class, 'register'])->name('ferias.register');
+    Route::get('/mis-ferias', [FeriaController::class, 'misFerias'])->name('ferias.mis');
+
+
 
 });
 

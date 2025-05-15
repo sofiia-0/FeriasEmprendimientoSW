@@ -4,6 +4,16 @@
             <h2 class="font-extrabold text-4xl text-[#485065] dark:text-[#EAE2CF] tracking-tight drop-shadow-lg">
                 {{ __('Ferias disponibles') }}
             </h2>
+            <!-- Botón Mis Ferias Registradas -->
+            @if(Auth::user()->product_type !== 'Administrador')
+                <a href="{{ route('ferias.mis') }}"
+                   class="inline-flex items-center gap-2 px-6 py-2 bg-[#588B71] text-white text-lg font-bold rounded-2xl shadow-xl hover:scale-105 hover:bg-[#485065] transition-all duration-200">
+                    <svg class="w-0 h-6" fill="none" stroke="currentColor" stroke-width="2"
+                         viewBox="0 0 24 24">
+                    </svg>
+                    {{ __('Mis Ferias Registradas') }}
+                </a>
+            @endif
 
             <!-- Solo muestra el botón de crear si el usuario es admin -->
             @if(Auth::user()->product_type === 'Administrador')
@@ -60,7 +70,18 @@
                                 @endif
                             </div>
                         </div>
-                        <!-- Confirmación de eliminación -->
+                        @if(Auth::user()->product_type !== 'Administrador')
+                            <form action="{{ route('ferias.register', $feria) }}" method="POST" x-data="{ showSuccess: false }" @submit.prevent="showSuccess = true; $el.submit()">
+                                @csrf
+                                <button type="submit"
+                                        class="px-5 py-2 bg-[#588B71] text-white font-bold rounded-xl shadow hover:bg-[#485065] hover:scale-105 transition-all duration-200">
+                                    {{ __('Registrarse') }}
+                                </button>
+                            </form>
+                            <div x-show="showSuccess" x-transition class="mt-4 p-4 bg-green-100 text-green-800 rounded-lg shadow">
+                                {{ session('success') }}
+                            </div>
+                        @endif
                         <div x-show="confirmDelete" x-transition class="flex flex-col items-center text-center mt-8">
                             <p class="text-[#D24F6B] font-bold mb-4 text-lg">{{ __('¿Estás seguro de eliminar?') }}</p>
                             <div class="flex justify-center gap-4">

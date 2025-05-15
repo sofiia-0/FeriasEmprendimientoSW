@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Feria; 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class FeriaController extends Controller
 {
@@ -63,6 +64,27 @@ public function destroy(Feria $feria)
 {
     $feria->delete();
     return redirect()->route('ferias.index')->with('success', 'Feria eliminada correctamente.');
+}
+
+
+public function register(Feria $feria)
+{
+    $user = Auth::user();
+
+    // Evitar duplicados
+    if (!$user->ferias->contains($feria->id)) {
+        $user->ferias()->attach($feria->id);
+    }
+
+    return redirect()->route('ferias.index')->with('success', 'Te has registrado a la feria.');
+}
+
+public function misFerias()
+{
+    $user = auth()->user();
+    $misFerias = $user->ferias;  // Relación muchos a muchos que definiste en User.php
+
+    return view('ferias.mis_ferias', compact('misFerias'));
 }
 
 }

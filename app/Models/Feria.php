@@ -21,4 +21,9 @@ class Feria extends Model
     'fecha_evento' => 'date',
     'hora_evento' => 'datetime:H:i',
 ];
+public function usuarios()
+{
+    return $this->belongsToMany(User::class, 'feria_emprendedor');
+}
+
 }

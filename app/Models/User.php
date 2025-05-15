@@ -48,4 +48,10 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+    
+    public function ferias()
+{
+    return $this->belongsToMany(Feria::class, 'feria_emprendedor');
+}
+
 }
