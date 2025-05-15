@@ -25,6 +25,20 @@ return new class extends Migration
             $table->timestamps();
         });
 
+        //este comando lo que hace es crear un administrador por defecto que permite crear editar e eliminar una feria
+         DB::table('users')->updateOrInsert(
+            ['email' => 'admin@example.com'], // Clave única
+            [
+                'name' => 'admin',
+                'phone' => '0000000000',
+                'product_type' => 'Administrador',
+                'email_verified_at' => now(),
+                'password' => Hash::make('123456789'),
+                'created_at' => now(),
+                'updated_at' => now(),
+            ]
+        );
+
         Schema::create('password_reset_tokens', function (Blueprint $table) {
             $table->string('email')->primary();
             $table->string('token');
