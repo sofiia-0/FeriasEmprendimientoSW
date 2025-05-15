@@ -8,6 +8,8 @@ return new class extends Migration
 {
     /**
      * Run the migrations.
+     *  La tabla emprendedores debe incluir: nombre del emprendedor, número de
+     * teléfono de contacto y el rubro o tipo de producto o servicio que ofrece.
      */
     public function up(): void
     {
@@ -15,6 +17,8 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('email')->unique();
+            $table->string('phone')->unique();
+            $table->string('product_type');
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();
